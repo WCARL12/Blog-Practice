@@ -27,6 +27,9 @@ app.get('/blogs', (req, res) => {
   .then((result) => {
     res.render('index', { title: 'Home', navInfo: 'Welcome to Abbatek Blogs!', blogs : result })
   })
+  .catch(err => {
+    console.log(err);
+  })
 
 
 })

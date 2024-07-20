@@ -9,30 +9,26 @@
     </header>
 
     <main>
-
         <section class="blogs content">
             <% if(blogs.length > 0) { 
-                blogs.forEach((blog) => { %>
+                blogs.forEach((blog) => { %> <!-- Use the singular 'blog' here -->
                     <div class="blog-container">
                         <div class="blog-img">
-                            <img src="/img/dummy-article.jpg" alt="article">
+                            <img src="<%= blog.imageURL %>" alt="article"> <!-- Correctly access 'blog.imageURL' -->
+                            <% console.log(blog.imageURL); %> 
                         </div>
-                        <h3><%= blog.blogTitle %></h3>
-                        <p><%= blog.blogSnippet %></p>
+                        <h3><%= blog.title %></h3> <!-- Correctly access 'blog.title' -->
+                        <p><%= blog.snippet %></p> <!-- Correctly access 'blog.snippet' -->
                         <a href="#">Read More</a>
                     </div>
-                    
                 <% })
             } else { %>
                 <p>No blogs posted currently</p>
-
-            <% }%>
+            <% } %>
         </section>
-        
     </main>
     <footer>
         <%- include('./partials/footer.ejs') %>
     </footer>
-    
 </body>
 </html>
