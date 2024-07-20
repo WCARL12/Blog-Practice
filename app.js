@@ -1,8 +1,16 @@
 const express = require('express')
+const morgan = require('morgan')
+const mongoose = require('mongoose')
 
 const app = express()
 
-app.listen(3000)
+const dbURI = 'mongodb+srv://CarlW12:CWmDB9082@nodetuts.6c0fesw.mongodb.net/abbatek-database?retryWrites=true&w=majority&appName=nodetuts'
+
+mongoose.connect(dbURI)
+.then(result => app.listen(3000))
+.catch(err => {
+  console.log('Could not connect to MongoDB', err);
+})
 
 app.use(express.static('public'))
 
