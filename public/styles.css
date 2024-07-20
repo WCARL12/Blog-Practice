@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+header{
+    font-size: 1.4em;
+    padding: 10px 20px;
+
+}
+
+nav ul{
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    gap: 1em;
+
+}
+
+nav ul li:first-child{
+    margin-right: auto;
+}
+main{
+    padding: 40px 10px;
+}
+.blogs{
+    display: flex;
+    justify-content: center;
+    gap: 2.5em;
+    flex-wrap: wrap;
+}
+
+.blog-container{
+    width: min-content;
+    padding: 16px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 1.1em;
+
+    
+}
+
+.blog-img img{
+    height: 250px;
+}
+
+footer{
+    text-align: center;
+}
+
+/* Style for create.ejs */
+
+.form-container{
+    padding: 16px 20px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:.5em;
+}
+.file, .title, .snippet, .body{
+    width: 450px;
+    display:flex;
+    flex-direction: column;
+}
+
+form input, form textarea{
+    padding: 3px 8px;
+    font-size: 1.1em;
+}
+form textarea{
+    height: 250px;
+}
