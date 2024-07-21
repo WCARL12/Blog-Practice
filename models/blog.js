@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const blogsSchema = new Schema({
     imageURL : {
         type : String,
-        required : true
+        required : false
     },
     title: {
         type: String,

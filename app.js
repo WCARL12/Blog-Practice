@@ -1,6 +1,8 @@
 const express = require('express')
-const morgan = require('morgan')
+// const morgan = require('morgan')
 const mongoose = require('mongoose')
+const multer = require('multer')
+const path = require('path')
 const Blog = require('./models/blog')
 
 const app = express()
@@ -12,6 +14,17 @@ mongoose.connect(dbURI)
 .catch(err => {
   console.log('Could not connect to MongoDB', err);
 })
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'public/img'); // Save files in public/img directory
+  },
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to filename
+  }
+});
+
+const upload = multer({ storage: storage });
 
 app.set('view engine', 'ejs')
 
@@ -38,14 +51,29 @@ app.get('/blogs/create', (req, res) => {
   res.render('create', { title: 'Create', navInfo: 'Create a Blog!' })
 })
 
-app.post('/blogs', (req, res) => {
-  const blog = new Blog(req.body)
-  console.log(blog);
+// app.post('/blogs', (req, res) => {
+//   const blog = new Blog(req.body)
+//   console.log(blog);
+//   blog.save()
+//   .then((result) => {
+//   res.redirect('/blogs')
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+// })
+
+app.post('/blogs', upload.single('imageURL'), (req, res) => {
+  const { title, snippet, body } = req.body;
+  const imageURL = req.file ? `/img/${req.file.filename}` : null;
+
+  const blog = new Blog({ title, snippet, body, imageURL });
+
   blog.save()
-  .then((result) => {
-  res.redirect('/blogs')
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-})
+    .then((result) => {
+      res.redirect('/blogs');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});

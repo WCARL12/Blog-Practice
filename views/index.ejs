@@ -14,8 +14,7 @@
                 blogs.forEach((blog) => { %> <!-- Use the singular 'blog' here -->
                     <div class="blog-container">
                         <div class="blog-img">
-                            <img src="<%= blog.imageURL %>" alt="article"> <!-- Correctly access 'blog.imageURL' -->
-                            <% console.log(blog.imageURL); %> 
+                            <img src="<%= blog.imageURL %>" alt="article">
                         </div>
                         <h3><%= blog.title %></h3> <!-- Correctly access 'blog.title' -->
                         <p><%= blog.snippet %></p> <!-- Correctly access 'blog.snippet' -->

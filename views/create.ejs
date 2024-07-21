@@ -8,10 +8,10 @@
 
     <main>
         <div class="form-containter">
-            <form action="/blogs" method="post">
+            <form action="/blogs" method="post" enctype="multipart/form-data">
                 <div class="file">
-                    <label for="image">Upload article image:</label>
-                    <input type="file" name="imageURL" id="image" required>
+                    <label for="image">Upload article image (optional):</label>
+                    <input type="file" name="imageURL" id="image">
                 </div>
                 <div class="title">
                     <label for="title">Blog title:</label>
