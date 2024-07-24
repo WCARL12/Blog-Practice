@@ -1,0 +1,25 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <header>
+      <h1>Abbatek Blogs</h1>
+      <%- include('./partials/nav.ejs') %>
+    </header>
+
+    <main>
+      <section class="blogs content">
+        <div class="blog-container">
+          <div class="blog-img">
+              <img src="<%= blog.imageURL %>" alt="article">
+          </div>
+          <h3><%= blog.title %></h3> <!-- Correctly access 'blog.title' -->
+          <p><%= blog.body %></p>
+      </div>
+    </section>
+    </main>
+    <footer>
+      <%- include('./partials/footer.ejs') %>
+    </footer>
+    
+</body>
+</html>

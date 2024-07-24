@@ -18,7 +18,7 @@
                         </div>
                         <h3><%= blog.title %></h3> <!-- Correctly access 'blog.title' -->
                         <p><%= blog.snippet %></p> <!-- Correctly access 'blog.snippet' -->
-                        <a href="#">Read More</a>
+                        <a href="/blogs/<%= blog._id%>">Read More</a>
                     </div>
                 <% })
             } else { %>

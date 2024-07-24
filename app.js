@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
       cb(null, 'public/img'); // Save files in public/img directory
   },
   filename: (req, file, cb) => {
+    console.log(file.originalname);
       cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to filename
   }
 });
@@ -43,28 +44,15 @@ app.get('/blogs', (req, res) => {
   .catch(err => {
     console.log(err);
   })
-
-
 })
 
 app.get('/blogs/create', (req, res) => {
   res.render('create', { title: 'Create', navInfo: 'Create a Blog!' })
 })
 
-// app.post('/blogs', (req, res) => {
-//   const blog = new Blog(req.body)
-//   console.log(blog);
-//   blog.save()
-//   .then((result) => {
-//   res.redirect('/blogs')
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   })
-// })
-
 app.post('/blogs', upload.single('imageURL'), (req, res) => {
   const { title, snippet, body } = req.body;
+  console.log(req.file);
   const imageURL = req.file ? `/img/${req.file.filename}` : null;
 
   const blog = new Blog({ title, snippet, body, imageURL });
@@ -77,3 +65,11 @@ app.post('/blogs', upload.single('imageURL'), (req, res) => {
       console.log(err);
     });
 });
+
+app.get('/blogs/:id', (req, res) => {
+  const id = req.params.id
+   Blog.findById(id)
+   .then(result => {
+    res.render('details', {blog : result, navInfo: 'Blogs', title : 'Blog Details'})
+   })
+})
